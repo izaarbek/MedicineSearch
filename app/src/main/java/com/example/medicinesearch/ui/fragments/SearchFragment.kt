@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.medicinesearch.R
 import com.example.medicinesearch.ui.viewmodels.MedicineViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -50,7 +52,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     R.layout.support_simple_spinner_dropdown_item,
                     it.map { it.name })
             )
+
+            autoCompleteMedicine.setOnItemClickListener { adapterView, view, position, ids ->
+
+                Log.i("akebfweg",":"+adapterView.getItemAtPosition(position))
+                val name=adapterView.getItemAtPosition(position)
+                findNavController().navigate(R.id.toMedicineList, bundleOf("drug_name" to name))
+            }
+
+
+
         })
+
+
+
     }
 
     companion object {

@@ -1,26 +1,26 @@
 package com.example.medicinesearch.ui.data.models
 
 import androidx.annotation.NonNull
-import androidx.room.*
-import org.jetbrains.annotations.NotNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "medicine",indices = emptyArray(),foreignKeys = emptyArray())
+@Entity(tableName = "medicine")
 data class Medicine(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    @NonNull
+    @ColumnInfo(name="id")
     var id: Int,
     @ColumnInfo(name = "name")
-    @NonNull
     var name: String,
+    @ColumnInfo(name = "release_form")
+    var releaseForm: String,
+    @ColumnInfo(name = "dosage")
+    var dosage: String,
+    @ColumnInfo(name = "release_country")
+    var countryProducer: String,
     @ColumnInfo(name = "manufacturer")
-    @NonNull
     var manufacturer: String,
-    @ColumnInfo(name = "expiryDate")
-    @NonNull
-    var expiryDate: String,
-    @ColumnInfo(name = "isFavorite")
-    @NonNull
-    var isFavorite: Int
+    @ColumnInfo(name = "is_favorite")
+    var is_favorite: Int
 )

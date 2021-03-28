@@ -9,7 +9,11 @@
         android:id="@+id/searchFragment"
         android:name="com.example.medicinesearch.ui.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/toMedicineList"
+            app:destination="@id/medicineListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.medicinesearch.ui.fragments.FavoritesFragment"
@@ -20,4 +24,18 @@
         android:name="com.example.medicinesearch.ui.fragments.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/medicineListFragment"
+        android:name="com.example.medicinesearch.ui.fragments.MedicineListFragment"
+        android:label="fragment_medicine_list"
+        tools:layout="@layout/fragment_medicine_list" >
+        <action
+            android:id="@+id/toPharmacyList"
+            app:destination="@id/pharmacyListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pharmacyListFragment"
+        android:name="com.example.medicinesearch.ui.fragments.PharmacyListFragment"
+        android:label="fragment_pharmacy_list"
+        tools:layout="@layout/fragment_pharmacy_list" />
 </navigation>

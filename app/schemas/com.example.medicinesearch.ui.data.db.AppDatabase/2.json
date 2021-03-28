@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "ee8b208ee0201f7452d7d7d6013beb90",
+    "identityHash": "b97dec36c9a297331403608ab44b9c8e",
     "entities": [
       {
         "tableName": "medicine",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `manufacturer` TEXT NOT NULL, `expiryDate` TEXT NOT NULL, `isFavorite` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `release_form` TEXT NOT NULL, `dosage` TEXT NOT NULL, `release_country` TEXT NOT NULL, `manufacturer` TEXT NOT NULL, `is_favorite` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,20 +21,32 @@
             "notNull": true
           },
           {
+            "fieldPath": "releaseForm",
+            "columnName": "release_form",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dosage",
+            "columnName": "dosage",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "countryProducer",
+            "columnName": "release_country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "manufacturer",
             "columnName": "manufacturer",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "expiryDate",
-            "columnName": "expiryDate",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isFavorite",
-            "columnName": "isFavorite",
+            "fieldPath": "is_favorite",
+            "columnName": "is_favorite",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -52,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ee8b208ee0201f7452d7d7d6013beb90')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b97dec36c9a297331403608ab44b9c8e')"
     ]
   }
 }

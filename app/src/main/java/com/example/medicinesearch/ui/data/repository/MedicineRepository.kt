@@ -9,11 +9,11 @@ class MedicineRepository(private val medicineDao: MedicineDao):MedicineDao {
         return medicineDao.getAll()
     }
 
-    override fun loadAllFavorites(isFavorite: Boolean): LiveData<List<Medicine>> {
+    override fun loadAllFavorites(isFavorite: Int): LiveData<List<Medicine>> {
         return medicineDao.loadAllFavorites(isFavorite)
     }
 
-    override fun findByName(first: String): Medicine {
+    override fun findByName(first: String): LiveData<List<Medicine>> {
         return medicineDao.findByName(first)
     }
 
@@ -23,5 +23,13 @@ class MedicineRepository(private val medicineDao: MedicineDao):MedicineDao {
 
     override fun delete(medicine: Medicine) {
        medicineDao.delete(medicine)
+    }
+
+    override suspend fun update(medicine: Medicine) {
+        medicineDao.update(medicine)
+    }
+
+    override suspend fun findById(id: Int): Medicine {
+       return medicineDao.findById(id)
     }
 }
