@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/searchFragment"
+        android:title="@string/medicene"
+        android:icon="@drawable/ic_search"
+        app:iconTint="@color/white"
+        />
+
+    <item
+        android:id="@+id/favoritesFragment"
+        android:title="@string/favorites"
+        app:iconTint="@color/white"
+        android:icon="@drawable/ic_favorite_star" />
+
+    <item
+        android:id="@+id/aboutFragment"
+        android:title="@string/about"
+        app:iconTint="@color/white"
+        android:icon="@drawable/ic_help" />
+
+
+</menu>
