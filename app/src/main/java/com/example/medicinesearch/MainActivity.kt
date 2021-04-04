@@ -4,12 +4,17 @@ import android.Manifest
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
+import com.example.medicinesearch.ui.adapters.DrugAdapter
+import com.example.medicinesearch.ui.viewmodels.MedicineViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_favorites.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -33,9 +38,24 @@ class MainActivity : AppCompatActivity() {
         checkPermission()
     }
 
+    private val medicineViewModel by viewModels<MedicineViewModel>()
+
     private fun setUpBottomNav(navController: NavController){
         bottom_nav_view?.let {
             NavigationUI.setupWithNavController(it,navController)
+
+
+
+
+
+            medicineViewModel.medicineFavorites.observe(this,{
+                bottom_nav_view.getOrCreateBadge(R.id.favoritesFragment).number=it.size
+
+
+            })
+
+
+
         }
     }
 

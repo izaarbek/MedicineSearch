@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.medicinesearch.R
+import com.example.medicinesearch.ui.adapters.DrugAdapter
+import com.example.medicinesearch.ui.viewmodels.MedicineViewModel
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,10 +22,12 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FavoritesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private val medicineViewModel by viewModels<MedicineViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +37,29 @@ class FavoritesFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        favRv.layoutManager=LinearLayoutManager(requireContext())
+
+
+
+        medicineViewModel.medicineFavorites.observe(viewLifecycleOwner,{
+            val adapter= DrugAdapter(it)
+            favRv.adapter=adapter
+
+            countTxt.text=it.size.toString()
+
+
+        })
+
+
+
     }
+
+
 
     companion object {
         /**

@@ -8,9 +8,11 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.medicinesearch.R
 import com.example.medicinesearch.ui.adapters.PharmacyAdapter
@@ -59,12 +61,6 @@ class PharmacyListFragment : Fragment(R.layout.fragment_pharmacy_list) {
 
 
         arguments?.let {
-
-
-
-
-
-
 
             val drug_id = it.getInt("drug_id")
             medicineViewModel.getById(drug_id)
@@ -123,31 +119,32 @@ class PharmacyListFragment : Fragment(R.layout.fragment_pharmacy_list) {
             // do work here
             val location = locationResult.lastLocation
 
-            stockViewModel.stockList.observe(viewLifecycleOwner, Observer { stockList ->
+            stockViewModel.stockList.observe(viewLifecycleOwner, { stockList ->
 
-                val idsOfPharmacies = stockList.map { it.pharmacy_id }
+                val idsOfPharmacies = stockList.map { it.id }
 
-                Log.i("askdhbjvefb",":"+idsOfPharmacies .toString())
+
 
                 pharmacyViewModel.getPharmaciesByIds(idsOfPharmacies)
 
                 pharmacyViewModel.pharmacyList.observe(
                     viewLifecycleOwner,
-                    Observer { pharmacyList ->
+                 { pharmacyList ->
 
-
-
-                        if(pharmacyList.isNotEmpty()){
-                            Log.i("askdhbjvefb","dvd:")
-
+                     if(pharmacyList.isNotEmpty()){
                             pharmacyList.forEach { pharmacy ->
-                                val prices = stockList.find { it.pharmacy_id == pharmacy.id }
 
-                                val distance=distance(location.latitude,location.longitude,pharmacy.lat,pharmacy.lng)
-                                val combined = Combined(pharmacy.name, prices!!.price,distance)
-                                combinedList.add(combined)
+                                val prices = stockList.find { it.id == pharmacy.id }
 
-                                Log.i("ajdhzvsv","asjdhvg")
+                                prices?.let {
+                                    val distance=distance(location.latitude,location.longitude,pharmacy.lat,pharmacy.lng)
+                                    val combined = Combined(pharmacy.name, prices.price,distance,pharmacy.lat,pharmacy.lng,pharmacy.phone)
+                                    combinedList.add(combined)
+
+                                    Log.i("ajdhzvsv","asjdhvg")
+                                }
+
+
 
 
 
@@ -155,12 +152,35 @@ class PharmacyListFragment : Fragment(R.layout.fragment_pharmacy_list) {
                             }
 
                             combinedList.sortBy { it.price }
-
-                            Log.i("asjdhbvwvb",":"+combinedList.toString())
-
                             val pharmacyAdapter=PharmacyAdapter(combinedList)
                             rvPharmacies.adapter=pharmacyAdapter
                             rvPharmacies.layoutManager=LinearLayoutManager(requireContext())
+
+
+                            pharmacyAdapter.onItemClick={combined ->
+
+
+
+                                val bundle= bundleOf("drug_id" to  requireArguments().getInt("drug_id"),
+                                    "drug_form" to requireArguments().getString("drug_form"),
+                                    "drug_dosage" to requireArguments().getString("drug_dosage"),
+                                    "is_favorite" to favoriteCheckBox.isChecked,
+                                    "drug_name" to requireArguments().getString("drug_name"),
+                                    "drug_price" to combined.price,
+                                    "pharmacy_name" to combined.name,
+                                    "pharmacy_distance" to combined.distance,
+                                    "pharmacy_lat" to combined.lat,
+                                    "pharmacy_lng" to combined.lng,
+                                    "pharmacy_phone" to combined.phone
+
+
+
+                                )
+
+                                findNavController().navigate(R.id.toPharmacyDetail,bundle)
+
+
+                            }
                         }
 
 
@@ -212,7 +232,7 @@ class PharmacyListFragment : Fragment(R.layout.fragment_pharmacy_list) {
         val locationRequest = LocationRequest.create()?.apply {
             interval = 10000
             fastestInterval = 5000
-            numUpdates=3
+            numUpdates=1
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
         fusedLocationClient.requestLocationUpdates(locationRequest,

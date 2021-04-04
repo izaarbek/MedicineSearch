@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "448960864301",
+    "project_id": "medicine-search-2ad84",
+    "storage_bucket": "medicine-search-2ad84.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448960864301:android:d19899897f85111fed18a4",
+        "android_client_info": {
+          "package_name": "com.example.medicinesearch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448960864301-mvja7bl91nimf9n4lj9bor1l0jbk16ka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9u1rr-Bh7i4mQMxflKwrUUTIojQVTL7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448960864301-mvja7bl91nimf9n4lj9bor1l0jbk16ka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

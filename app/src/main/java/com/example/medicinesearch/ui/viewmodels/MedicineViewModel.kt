@@ -13,16 +13,19 @@ class MedicineViewModel(application: Application):AndroidViewModel(application) 
 
     private val medicineRepository:MedicineRepository
     val medicineList:LiveData<List<Medicine>>
+    val medicineFavorites:LiveData<List<Medicine>>
 
     lateinit var currentMedicine:Medicine
 
     lateinit var medicineNameList:LiveData<List<Medicine>>
 
 
+
     init {
         val medicineDao=AppDatabase.getDatabase(application).medicineDao()
         medicineRepository=MedicineRepository(medicineDao);
         medicineList=medicineRepository.getAll()
+        medicineFavorites=medicineRepository.loadAllFavorites(1)
     }
 
 
@@ -34,6 +37,8 @@ class MedicineViewModel(application: Application):AndroidViewModel(application) 
     fun getById(id:Int)=viewModelScope.launch{
         currentMedicine=medicineRepository.findById(id)
     }
+
+
 
 
 

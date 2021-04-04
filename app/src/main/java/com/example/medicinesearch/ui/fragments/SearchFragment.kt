@@ -43,14 +43,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
 
-        medicineViewModel.medicineList.observe(viewLifecycleOwner, Observer {
+        medicineViewModel.medicineList.observe(viewLifecycleOwner, Observer {medicineList->
 
-            Log.i("dkfbeb", ":" + it.toString())
+            Log.i("dkfbeb", ":" +medicineList.toString())
             autoCompleteMedicine.setAdapter(
                 ArrayAdapter(
                     requireContext(),
                     R.layout.support_simple_spinner_dropdown_item,
-                    it.map { it.name })
+                    medicineList.map { it.name }.distinct())
             )
 
             autoCompleteMedicine.setOnItemClickListener { adapterView, view, position, ids ->

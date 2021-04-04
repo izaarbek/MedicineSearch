@@ -9,6 +9,6 @@ import com.example.medicinesearch.ui.data.models.Stock
 @Dao
 interface StockDao {
 
-    @Query("SELECT * FROM stock WHERE кодпрепарата=:id")
+    @Query("SELECT * FROM stock WHERE кодаптеки=:id LIMIT 500")
     fun selectStocksbyDrugId(id:Int): LiveData<List<Stock>>
 }
