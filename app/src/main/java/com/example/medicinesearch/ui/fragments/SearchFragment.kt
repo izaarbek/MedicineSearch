@@ -43,7 +43,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
 
-        medicineViewModel.medicineList.observe(viewLifecycleOwner, Observer {medicineList->
+        medicineViewModel.medicineList.observe(viewLifecycleOwner, { medicineList->
 
             Log.i("dkfbeb", ":" +medicineList.toString())
             autoCompleteMedicine.setAdapter(

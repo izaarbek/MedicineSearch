@@ -33,7 +33,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "medicine_search"
-                ).createFromAsset("medicine_search.db")
+                ).createFromAsset("new_medicine.db")
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

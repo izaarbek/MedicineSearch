@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "pharmacy")
 data class Pharmacy(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id_аптеки")
+    @ColumnInfo(name = "кодаптеки")
     var id: Int,
     @ColumnInfo(name = "аптека")
     var name: String,
@@ -16,5 +16,12 @@ data class Pharmacy(
     @ColumnInfo(name = "Geolat")
     var lat: Double,
     @ColumnInfo(name = "Geolong")
-    var lng: Double
+    var lng: Double,
+    @ColumnInfo(name = "район")
+    var district:String,
+    @ColumnInfo(name="ориентир")
+    var nearBy:String,
+    @ColumnInfo(name="адрес")
+    var address:String
+
 )

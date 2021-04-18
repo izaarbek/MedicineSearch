@@ -33,8 +33,9 @@ class PharmacyAdapter(val combinedList:List<Combined>) :RecyclerView.Adapter<Pha
         fun bindData(combined: Combined){
 
             pharmacyName.text=combined.name
-            pharmacyPrice.text=combined.price
-            distanceTxt.text=combined.distance.toString()
+
+            pharmacyPrice.text=combined.price?.replace("₽","uzs")
+            distanceTxt.text=combined.distance+" km"
 
         }
 

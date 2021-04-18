@@ -21,6 +21,8 @@ data class Medicine(
     var countryProducer: String,
     @ColumnInfo(name = "manufacturer")
     var manufacturer: String,
+    @ColumnInfo(name = "pharm_group")
+    var pharmGroup:String,
     @ColumnInfo(name = "is_favorite")
     var is_favorite: Int
 )

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "stock")
 data class Stock(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "id_наличие")
     var id: Int,
     @ColumnInfo(name = "кодпрепарата")
     var drug_id: Int,
@@ -16,5 +16,5 @@ data class Stock(
     @ColumnInfo(name = "дата")
     var date: String,
     @ColumnInfo(name = "цена")
-    var price: String
+    var price: String?=null
 )
